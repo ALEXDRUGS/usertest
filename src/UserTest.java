@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
 
@@ -32,5 +31,26 @@ public class UserTest {
     void getEmptyEmailTest() {
         User user = new User();
         assertNull(user.getEmail());
+    }
+
+    @Test
+    @DisplayName("Проверка наличия символа '@' в email")
+    public void isAtInEmailTest() {
+        User user = new User("login", "blabla@gmail.com");
+        assertTrue(user.getEmail().contains("@"));
+    }
+
+    @Test
+    @DisplayName("Проверка наличия символа '.' в email")
+    public void isDotInEmailTest() {
+        User user = new User("login", "blabla@gmail.com");
+        assertTrue(user.getEmail().contains("."));
+    }
+
+    @Test
+    @DisplayName("Проверка сравнения полей login и email при создании объекта")
+    void comparisonLoginAndEmailTest() {
+        User user = new User("login", "blabla@gmail.com");
+        assertNotEquals(user.getLogin(), user.getEmail());
     }
 }
